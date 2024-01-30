@@ -1,18 +1,18 @@
 import express from "express";
-
-import Todo from "../models/Todo.js";
+import { getTodos, addTodo, updateTodo, deleteTodo } from "../controllers/todos/index.js"
 
 const route = express.Router();
 
-route.get("/todos", (request, response) => {
-  console.log(request.body.data)
-  Todo.find().then((data) => {
-    console.log(data)
-    });
-});
+route.get("/todos", getTodos)
+
+route.post("/add-todo", addTodo)
+
+route.put("/edit-todo/:id", updateTodo)
+
+route.delete("/delete-todo/:id", deleteTodo)
 
 route.get("/", (request, response) => {
-    console.log(request.body.data)
-  });
+  response.json("Here is response")
+});
 
-export default route;
+export default route; 
